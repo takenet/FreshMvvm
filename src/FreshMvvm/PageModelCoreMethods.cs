@@ -35,7 +35,7 @@ namespace FreshMvvm
             return false;
         }
 
-        public async Task PushPageModel<T> (object data, bool modal = false) where T : FreshBasePageModel
+        public async Task PushPageModel<T>(object data, bool modal = false, bool animated = true) where T : FreshBasePageModel
         {
             T pageModel = FreshIOC.Container.Resolve<T> ();
 
@@ -45,26 +45,26 @@ namespace FreshMvvm
 
             IFreshNavigationService rootNavigation = FreshIOC.Container.Resolve<IFreshNavigationService> ();
 
-            await rootNavigation.PushPage (page, pageModel, modal);
+            await rootNavigation.PushPage(page, pageModel, modal, animated);
         }
 
-        public async Task PopPageModel (bool modal = false)
+        public async Task PopPageModel(bool modal = false, bool animated = true)
         {
             IFreshNavigationService rootNavigation = FreshIOC.Container.Resolve<IFreshNavigationService> ();
-            await rootNavigation.PopPage (modal);
+            await rootNavigation.PopPage(modal, animated);
         }
 
-        public async Task PopPageModel (object data, bool modal = false)
+        public async Task PopPageModel(object data, bool modal = false, bool animated = true)
         {
             if (_pageModel != null && _pageModel.PreviousPageModel != null && data != null) {
                 _pageModel.PreviousPageModel.ReverseInit (data);
             }
-            await PopPageModel (modal);
+            await PopPageModel(modal, animated);
         }
 
-        public Task PushPageModel<T> () where T : FreshBasePageModel
+        public Task PushPageModel<T> (bool animated = true) where T : FreshBasePageModel
         {
-            return PushPageModel<T> (null);
+            return PushPageModel<T>(null, animated);
         }
 
 		public void BatchBegin()

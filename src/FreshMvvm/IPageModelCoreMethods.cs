@@ -11,13 +11,13 @@ namespace FreshMvvm
 
         Task<bool> DisplayAlert (string title, string message, string accept, string cancel);
 
-        Task PushPageModel<T> (object data, bool modal = false) where T : FreshBasePageModel;
+        Task PushPageModel<T> (object data, bool modal = false, bool animated = true) where T : FreshBasePageModel;
 
-        Task PopPageModel (bool modal = false);
+        Task PopPageModel (bool modal = false, bool animated = true);
 
-        Task PopPageModel (object data, bool modal = false);
+        Task PopPageModel (object data, bool modal = false, bool animated = true);
 
-        Task PushPageModel<T> () where T : FreshBasePageModel;
+        Task PushPageModel<T> (bool animated = true) where T : FreshBasePageModel;
 
 		void BatchBegin();
 

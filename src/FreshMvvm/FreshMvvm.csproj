@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FreshIOC\IOC.csproj">
-      <Project>{CE6AA8F2-BD67-4051-8AE6-9FFCA9E663FE}</Project>
+      <Project>{ce6aa8f2-bd67-4051-8ae6-9ffca9e663fe}</Project>
       <Name>IOC</Name>
     </ProjectReference>
   </ItemGroup>

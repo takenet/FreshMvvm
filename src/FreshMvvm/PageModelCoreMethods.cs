@@ -64,7 +64,7 @@ namespace FreshMvvm
 
         public Task PushPageModel<T> (bool animated = true) where T : FreshBasePageModel
         {
-            return PushPageModel<T>(null, animated);
+            return PushPageModel<T>(null, false, animated);
         }
 
 		public void BatchBegin()

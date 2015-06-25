@@ -35,10 +35,8 @@ namespace FreshMvvm
             return false;
         }
 
-        public async Task PushPageModel<T>(object data, bool modal = false, bool animated = true) where T : FreshBasePageModel
+        private async Task PushPageModel<T>(T pageModel, object data, bool modal = false, bool animated = true) where T : FreshBasePageModel
         {
-            T pageModel = FreshIOC.Container.Resolve<T>();
-
             var page = FreshPageModelResolver.ResolvePageModel<T>(data, pageModel);
 
             pageModel.PreviousPageModel = _pageModel;
@@ -46,6 +44,13 @@ namespace FreshMvvm
             IFreshNavigationService rootNavigation = FreshIOC.Container.Resolve<IFreshNavigationService>();
 
             await rootNavigation.PushPage(page, pageModel, modal, animated);
+        }
+
+        public async Task PushPageModel<T>(object data, bool modal = false, bool animated = true) where T : FreshBasePageModel
+        {
+            T pageModel = FreshIOC.Container.Resolve<T>();
+            await PushPageModel<T>(pageModel, data, modal, animated);
+          
         }
 
         public async Task PopPageModel(bool modal = false, bool animated = true)
@@ -85,6 +90,14 @@ namespace FreshMvvm
             {
                 await _currentPage.Navigation.PopToRootAsync();
             }
+        }
+
+        public async Task ReplaceCurrentPageModel<T>(object data = null, bool animated = true) where T : FreshBasePageModel
+        {
+            T pageModel = FreshIOC.Container.Resolve<T>();            
+            await PushPageModel<T>(pageModel, data, false, animated);
+            pageModel.PreviousPageModel = _pageModel.PreviousPageModel;
+            _currentPage.Navigation.RemovePage(_currentPage);
         }
     }
 }

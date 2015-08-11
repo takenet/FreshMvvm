@@ -35,7 +35,7 @@ namespace FreshMvvm
             return false;
         }
 
-        private async Task PushPageModel<T>(T pageModel, object data, bool modal = false, bool animated = true) where T : FreshBasePageModel
+        public async Task PushPageModel<T>(T pageModel, object data, bool modal = false, bool animated = true) where T : FreshBasePageModel
         {
             var page = FreshPageModelResolver.ResolvePageModel<T>(data, pageModel);
 

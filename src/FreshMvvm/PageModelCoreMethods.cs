@@ -55,17 +55,17 @@ namespace FreshMvvm
 
         public async Task PopPageModel(bool modal = false, bool animated = true)
         {
-            IFreshNavigationService rootNavigation = FreshIOC.Container.Resolve<IFreshNavigationService>();
-            await rootNavigation.PopPage(modal, animated);
+            await PopPageModel(null, modal, animated);
         }
 
         public async Task PopPageModel(object data, bool modal = false, bool animated = true)
         {
-            if (_pageModel != null && _pageModel.PreviousPageModel != null && data != null)
+            if (_pageModel != null && _pageModel.PreviousPageModel != null)
             {
                 _pageModel.PreviousPageModel.ReverseInit(data);
             }
-            await PopPageModel(modal, animated);
+            IFreshNavigationService rootNavigation = FreshIOC.Container.Resolve<IFreshNavigationService>();
+            await rootNavigation.PopPage(modal, animated);
         }
 
         public Task PushPageModel<T>(bool animated = true) where T : FreshBasePageModel
